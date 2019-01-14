@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/frontpage :: header"/>
+
+<body>
+<div class="container mt-3"><!--PAGE WRAPPER-->
+    <div class="page-header" th:replace="common/frontpage :: navbar"/><!--PAGE HEADER-->
+
+    <div class="row">
+
+
+   <div class="col-md-8 col-sm-12">
+       <h1 class="text-center">List Of All Categories</h1>
+
+       <div th:each="cats : ${postCat}">
+           <a th:href="@{/postCat__${cats.id}__}"><h2 th:text="${cats.categoryName}"></h2></a>
+       </div>
+   </div>
+
+
+    <div class="col-md-4 col-sm-12" id="aside" th:replace="common/frontpage :: sidebar"/><!--Aside sec-->
+
+
+</div>
+
+
+    <div th:replace="common/frontpage :: footer"/>
+
+
+</div><!--Page Wrapper-->
+</body>
+</html>
+
+<script>
+
+
+</script>

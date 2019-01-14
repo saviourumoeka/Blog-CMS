@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/frontpage :: header"/>
+
+<body>
+    <div class="container mt-3"><!--PAGE WRAPPER-->
+        <div class="page-header" th:replace="common/frontpage :: navbar"></div>
+           
+
+            <div class="jumbotron"><!--INTRO SEC-->
+                <h1 class="display-4 text-center">Xavier Technology Inc</h1>
+                <p class="lead">Xavier Technology is a Start Up firm that Researches into the future of technology. <br>
+                Get the Tech news and reviews you can Trust. You think the specifications or price of a device is too good to be true. meet the myth busters and read about it on my blog
+                </p>
+                <a class="bg-primary p-2" id="abt" href="about.html">Learn More</a>
+               
+            </div><!--INTRO SEC ENDS--> 
+    
+        <div class="row">
+     <div class="col-md-8 col-sm-10" id="content"> <!--CONTENT SEC STARTS-->
+            <div class="row">
+            <div class="col-md-6 col-sm-12" th:each="pst , iterStat : ${poss}">
+                    <h6 class="mt-o"> <b th:text="${pst.postHeadline}">Apple releases New iPhone X Plus</b></h6>
+                    <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Article</a></li>
+                                <li class="breadcrumb-item"><a href="phones.html" th:text="${pst.postCategory.categoryName}">Phones</a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${pst.postName}">iPhoneX plus</li>
+                            </ol>
+                        </nav>
+                <div class="w-100"> <a th:href="@{/view__${pst.id}__}"><img class="mediaimg img img-rounded w-100" th:src="@{'/images/'+${pst.id}+'.jpg'}"></a> </div>
+                <p th:text="${pst.postBody}">Apple Releases new iPhoneX: The Iphone series has always been a brand of product that most people look forward to...</p>
+                             <a class="text-primary" th:href="@{/view__${pst.id}__}">Read more</a>
+                            <a href="#"> <span class="fa fa-thumbs-up"></span> Like </a><span class="badge badge-primary">100</span>
+                             
+            </div>
+
+            </div>
+    
+       </div> <!--CONTENT SEC-->
+
+
+            <div class="col-md-4 col-sm-12" id="aside" th:replace="common/frontpage :: sidebar"/><!--Aside sec-->
+
+    </div>
+
+        <div th:replace="common/frontpage :: footer"/>
+
+    </div><!--PageWrapper-->
+
+</body>
+</html>
+
+<script>
+
+
+</script>

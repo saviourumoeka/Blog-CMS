@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminpage/common/dashBoard :: header"/>
+
+<body class="col-10 mx-auto">
+<div class="col-12" th:replace="adminpage/common/dashBoard :: pageheader"/>
+
+<div class="row"> <!--WRAPPER-->
+
+    <div th:replace="adminpage/common/dashBoard :: navpills"/>
+
+
+<div class="jumbotron align-content-center col-md-10">
+
+<div class="tab-header"> <!--Dashboard Add Post Nav-->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a href="#add_post" data-toggle="tab" th:classappend="${add}?'in active'" class="nav-link text-success">Add Post </a>
+        </li>
+        <li class="nav-item">
+            <a href="#view_posts" data-toggle="tab" th:classappend="${view}?'in active'" class="nav-link text-info">View Posts</a>
+        </li>
+
+        <li class="nav-item">
+            <a  href="#manage_sidebar" data-toggle="tab" class="nav-link text-secondary">Manage Sidebar</a>
+        </li>
+    </ul>
+
+</div><!--Dashboard add Post Nav ends-->
+
+<div class="tab-content">
+
+    <div id="add_post" class="ml-3 pb-3 tab-pane" th:classappend="${add}?'in active'"><!--Dashboard Add Post-->
+        <!--Add Post Form-->
+        <form method="post" th:action="@{/adminpage/post/add}" th:object="${post}" enctype="multipart/form-data">
+            <div class="col-10">
+                <div class="form-group col-12">
+                    <label  class="col-sm-6 control-label ">Post Headline</label>
+                    <input class="form-control" th:field="*{postHeadline}" type="text" placeholder="Post headline">
+                    <p th:if="${#fields.hasErrors('postHeadline')}"th:errors="*{postHeadline}" class="alert alert-danger"><br/></p>
+                </div>
+
+                <div class="form-group col-12">
+                    <label  class="col-sm-6 control-label ">Post Name</label>
+                    <input class="form-control" th:field="*{postName}" type="text" placeholder=" Post name">
+                    <p th:if="${#fields.hasErrors('postName')}"th:errors="*{postName}" class="alert alert-danger"><br/></p>
+                </div>
+
+
+                <div class="form-group col-12">
+                    <label  class="col-sm-6 control-label ">Post Category</label>
+                    <select class="form-control" name="categoryId">
+                <option value="" selected disabled> Select Post Category... </option>
+                <option th:each="postCats : ${postCategories}"
+                        th:text="${postCats.categoryName}"
+                        th:value="${postCats.id}">
+                </option>
+
+                </select>
+                    <p th:if="${noCat}==true">Category Cannot be Empty</p>
+                <label class="control-label col-6">Insert Image</label>
+                <input name="image" th:field="*{postImage}" class="col-12 mt-3" type="file" multiple/>
+
+            </div>
+
+            <div class="form-group col-12">
+                <p th:if="${#fields.hasErrors('postBody')}"th:errors="*{postBody}" class="alert alert-danger"><br/></p>
+                <label class="control-label"> Post Body</label>
+                <textarea id="note" th:field="*{postBody}" class="form-control" cols="30" rows="10"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Post <i class="fa fa-paper-plane"></i> </button>
+            </div>
+        </form>
+    </div><!--Dashboard Add Post Ends-->
+
+
+    <div id="view_posts" class="ml-3 pb-3 tab-pane" th:classappend="${view}?'in active'"><!--Dashboard edit post-->
+        <table class="table">
+            <thead class="text-center">
+            <tr>
+                <th>S/N</th>
+                <th>Post Title</th>
+                <th>Date Posted</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tr th:each="pst ,iterStat: ${posts}">
+                <td class="text-center" th:text="${iterStat.count}"></td>
+                <td class="text-center" th:text="${pst.postHeadline}"></td>
+                <td class="text-center" th:text="${pst.createdAt}"></td>
+                <td class="text-center navbar">
+                    <div class="dropdown bg-dark">
+                        <a href="" class="dropdown-toggle btn btn-dark" data-toggle="dropdown">Action </a>
+                        <ul class="dropdown-menu text-center">
+                            <a href="#" th:href="@{/adminpage/post/view__${pst.id}__}" class="dashboard-dropdown-item btn btn-success" target="_blank"><span class="fa fa-eye"></span> View </a>
+
+                            <a href="#" th:href="@{/adminpage/post/edit__${pst.id}__}" class="dashboard-dropdown-item btn btn-primary"><span class="fa fa-edit"></span> Edit </a>
+
+                            <a href="#" th:href="@{/adminpage/post/delete__${pst.id}__}" class="dashboard-dropdown-item btn btn-danger"><span class="fa fa-trash"></span> Delete </a>
+                        </ul>
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div><!--Dashboard edit post ends-->
+
+    <div id="manage_sidebar" class="ml-4 pb-3 tab-pane fade"><!--Dashboard manage sidebar-->
+        <form> <!--Add New Top News-->
+            <div class="form-group">
+                <label class="control-label">News Headline:</label>
+                <input class="form-control col-7" type="text">
+            </div>
+            <button class="btn btn-primary">Add News</button>
+        </form> <!--Add New Top News-->
+        <h2 class="text-primary text-center">Current Top News</h2>
+        <div class="row">
+            <div class="col-12"><!--Name Top News-->
+                <table class="table">
+                    <thead class="text-center">
+                    <tr>
+                        <th>S/N</th>
+                        <th>Post Title</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    <tr>
+                        <td>1</td>
+                        <td>Google Chrome becomes the most used web broswer</td>
+                        <td>
+                            <div class="btn btn-group">
+                                <a href="" class="btn btn-secondary bn-sm"><span class="fa fa-arrow-up"></span></a>
+
+                                <a href="" class="btn btn-secondary bn-sm"><span class="fa fa-arrow-down"></span></a>
+
+                                <div class="navbar">
+                                    <div class="dropdown bg-dark">
+                                        <a href="" class="dropdown-toggle btn btn-dark" data-toggle="dropdown">Action </a>
+                                        <ul class="dropdown-menu text-center">
+                                            <a href="#" class="dashboard-dropdown-item btn btn-success"><span class="fa fa-eye"></span> View </a>
+
+                                            <a href="#" class="dashboard-dropdown-item btn btn-primary"><span class="fa fa-edit"></span> Edit </a>
+
+                                            <a href="#" class="dashboard-dropdown-item btn btn-danger"><span class="fa fa-trash"></span> Delete </a>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div> <!--Manage Top news-->
+
+        </div>
+
+
+
+    </div><!--Dashboard Manage sidebar Ends-->
+</div>
+</div><!--Jumbotron-->
+</div><!--WRAPPER-->
+
+<div th:replace="adminpage/common/dashBoard :: scripts"/>
+</body>
+</html>

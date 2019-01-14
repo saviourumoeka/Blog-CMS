@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/frontpage :: header"/>
+
+<body>
+<div class="container mt-3"><!--PAGE WRAPPER-->
+    <div class="page-header" th:replace="common/frontpage :: navbar"/><!--PAGE HEADER-->
+ <div class="row">
+
+     <div class="col-md-8 col-sm-12">
+
+    <h1 class="text-center" th:text="${title}"></h1>
+
+         <div class="row">
+             <h4 th:if="${emptyCat}== true" class="text-center">Sorry this Category is Empty, Feel Free to check Out other Categories </h4>
+             <div class="col-md-6 col-sm-12" th:each="pst : ${posts}">
+                 <h6 class="mt-o"> <b th:text="${pst.postHeadline}"></b></h6>
+                 <nav aria-label="breadcrumb">
+                     <ol class="breadcrumb">
+                         <li class="breadcrumb-item"><a href="">Article</a></li>
+                         <li class="breadcrumb-item"><a href="phones.html" th:text="${pst.postCategory.categoryName}"></a></li>
+                         <li class="breadcrumb-item active" aria-current="page" th:text="${pst.postName}"></li>
+                     </ol>
+                 </nav>
+                 <div class="w-100"> <a th:href="@{/view__${pst.id}__}"><img class="mediaimg img img-rounded w-100" th:src="@{'/images/'+${pst.id}+'.jpg'}"></a> </div>
+                 <p th:text="${pst.postBody}"></p>
+                     <a class="text-primary" th:href="@{/view__${pst.id}__}">Read more</a>
+                 <a href="#"> <span class="fa fa-thumbs-up"></span> Like </a><span class="badge badge-primary">100</span>
+
+             </div>
+
+         </div>
+
+     </div>
+
+    <div class="col-md-4 col-sm-12" id="aside" th:replace="common/frontpage :: sidebar"/><!--Aside sec-->
+
+</div>
+
+</div>
+
+<div th:replace="common/frontpage :: footer"/>
+
+
+</div><!--Page Wrapper-->
+</body>
+</html>
+
+<script>
+
+
+</script>

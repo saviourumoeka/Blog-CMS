@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminpage/common/dashBoard :: header"/>
+<body>
+    <div class="container mt-3"><!--PAGE WRAPPER-->
+
+
+        <div id="add_post" class="ml-3 pb-3 jumbotron"><!--Dashboard Add Post-->
+            <a th:href="@{/adminpage/managepost}"><i class="fa fa-arrow-left"></i> Back</a>
+            <!--Add Post Form-->
+            <form method="post" th:action="@{/adminpage/post/updatePost}" th:object="${post}" enctype="multipart/form-data">
+                <div class="col-10">
+
+                    <div class="form-group col-6 mx-auto">
+                        <img class="mediaimg img img-fluid img-rounded w-100" th:src="@{'/images/'+${post.id}+'.jpg'}">
+                        <a href="#">edit Image</a>
+                    </div>
+                    <div class="form-group col-12">
+                        <input type="hidden" class="form-control" th:field="*{id}"/>
+                        <label  class="col-sm-6 control-label ">Post Headline</label>
+                        <input class="form-control" th:field="*{postHeadline}" type="text" placeholder="Post headline">
+                        <p th:if="${#fields.hasErrors('postHeadline')}"th:errors="*{postHeadline}" class="alert alert-danger"><br/></p>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label  class="col-sm-6 control-label ">Post Name</label>
+                        <input class="form-control" th:field="*{postName}" type="text" placeholder=" Post name">
+                        <p th:if="${#fields.hasErrors('postName')}"th:errors="*{postName}" class="alert alert-danger"><br/></p>
+                    </div>
+
+                    <option class="form-group col-12">
+                        <label  class="col-sm-6 control-label ">Post Category</label>
+                        <select class="form-control" name="categoryId">
+                    <option value="" selected disabled> Select Post Category... </option>
+                    <option th:each="postCats : ${postCategorie}"
+                            th:text="${postCats.categoryName}"
+                            th:value="${postCats.id}"
+                            th:selected="${postCats.categoryName == post.postCategory.categoryName}">
+                    </option>
+
+                    </select>
+
+
+
+
+                </div>
+
+                <div class="form-group col-12">
+                    <p th:if="${#fields.hasErrors('postBody')}"th:errors="*{postName}" class="alert alert-danger"><br/></p>
+                    <label class="control-label"> Post Body</label>
+                    <textarea id="note" th:field="*{postBody}" class="form-control" cols="30" rows="10"></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Save <i class="fa fa-paper-plane"></i> </button>
+            </form>
+        </div><!--Dashboard Add Post Ends-->
+
+        
+    </div><!--page wrapper ends here-->
+
+    <div th:replace="adminpage/common/dashBoard :: scripts"/>
+
+</body>
+</html>
+
+<script>
+
+
+</script>
