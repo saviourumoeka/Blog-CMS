@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dash Board</title>
+    <link rel="icon" type="image/png" href="images/x1.png">
+
+    <!--compiled and minified css-->
+    <link th:href="@{/css/bootstrap.min.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/js/jquery/jquery-ui.css}" rel="stylesheet">
+    <link  th:href="@{/css/fontawesome-all.css}" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/summernote/summernote-bs4.css}">
+
+
+</head>
+<body>
+<div class="container"><!--PAGE WRAPPER-->
+    <div class="page-header bg-primary dashboard_head"> <!--Page Header-->
+        <div class="col-12 row mb-3">
+            <h2 class="col-6 text-left">Xavier Inc Dash Board</h2>
+            <h2 class="col-6 text-right text-uppercase">welcome <span  th:text="${loggedAdmin}"></span> </h2>
+        </div>
+
+    </div> <!--PageHeader ends-->
+    <div class="row">
+        <div class="col-md-2 col-sm-3 col-xs-1"><!--PILLS-->
+
+            <ul class="nav flex-column nav-tabs" id="tabs">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#manage_post">Manage Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#manage_ads">Manage Ads</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#messages">Messages <span class="badge badge-info">12</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#manage_page_content">Manage Page Contents</a>
+                </li>
+                <li class="nav-item bg-danger">
+                    <a class="nav-link" th:href="@{/logout}">Log Out</a>
+                </li>
+            </ul>
+        </div><!--PIllS-->
+
+        <div class="tab-content col-md-10"> <!--TAB CONTENT STARTS-->
+
+            <div id="home" class="tab-pane" th:classappend="${home}?'in active'"><!--Dashboard home-->
+                <div class="jumbotron">
+                    <div class="tab-header"><!--Home Nav-->
+                        <ul class="nav nav-tab">
+                            <li class="nav-item"><a href="#notification" data-toggle="tab" class="nav-link text-success">Notification</a></li>
+                            <li class="nav-item"><a href="#logs" data-toggle="tab" class="nav-link text-danger">logs</a></li>
+                            <li class="nav-item"><a href="#admins" data-toggle="tab" class="nav-link text-info">Admins</a></li>
+                        </ul>
+                    </div><!--Home Nav-->
+
+                        <div class="tab-content">
+
+                            <div id="notification" class="tab-pane fade" th:classappend="${home}?'in active'">
+                                <ul style="list-style: none">
+                                    <li>Admin added a photo</li>
+                                    <li>Comment on a post</li>
+                                </ul>
+                            </div>
+
+                            <div id="logs" class="tab-pane fade">
+                                <ul style="list-style: none">
+                                    <li>Admin added a photo</li>
+                                    <li>Deleted A Post</li>
+                                </ul>
+                            </div>
+
+                            <div id="admins" class="tab-pane fade"><!--manage admin Tabs-->
+                                <div class="tab-header"><!--Home Nav-->
+                                    <ul class="nav nav-tab">
+                                        <li class="nav-item"><a href="#add_new_admin" data-toggle="tab" class="nav-link text-success">Add New Admin</a></li>
+                                        <li class="nav-item"><a href="#view_admin" data-toggle="tab" class="nav-link text-danger">View Admin</a></li>
+                                    </ul>
+                                </div><!--Home Nav-->
+
+                                <div class="tab-content">
+                                    <div id="add_new_admin" class="tab-pane fade">
+                                        <form>
+                                            <div class="form-group col-6">
+                                                <label class="control-label">Admin Name</label>
+                                                <input class="form-control" type="text" placeholder="Admin Name">
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Add Admin</button>
+                                        </form>
+                                    </div>
+
+                                    <div id="view_admin" class="tab-pane fade">
+                                        <table class="table">
+                                            <thead class="text-center">
+                                            <tr>
+                                                <th>S/N</th>
+                                                <th>Username</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Admin</td>
+                                                <td class="navbar">
+                                                    <div class="dropdown">
+                                                        <a href="" class="dropdown-toggle btn btn-dark mr-3" data-toggle="dropdown">Action </a>
+                                                        <ul class="dropdown-menu text-center">
+                                                            <a href="#" class="dashboard-dropdown-item btn btn-success"><span class="fa fa-eye"></span> View </a>
+
+                                                            <a href="#" class="dashboard-dropdown-item btn btn-primary"><span class="fa fa-edit"></span> Edit </a>
+
+                                                            <a href="#" class="dashboard-dropdown-item btn btn-danger"><span class="fa fa-trash"></span> Delete </a>
+                                                        </ul>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div><!--manage admin Tabs-->
+
+
+                        </div>
+
+                </div>
+
+            </div><!--Dashboard home ends-->
+
+
+            <div id="manage_post" class="tab-pane fade"> <!--Dashboard Mange Post Tab-->
+                <div class="jumbotron align-content-center">
+
+                    <div class="tab-header"> <!--Dashboard Add Post Nav-->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="#add_post" data-toggle="tab" class="nav-link text-success">Add Post </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#view_posts" data-toggle="tab" class="nav-link text-info">View Posts</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a  href="#manage_sidebar" data-toggle="tab" class="nav-link text-secondary">Manage Sidebar</a>
+                            </li>
+                        </ul>
+
+                    </div><!--Dashboard add Post Nav ends-->
+
+                    <div class="tab-content">
+
+                        <div id="add_post" class="ml-3 pb-3 tab-pane fade"><!--Dashboard Add Post-->
+                            <!--Add Post Form-->
+                            <form method="post" th:action="@{/adminpage/post/add}" th:object="${post}" enctype="multipart/form-data">
+                                <div class="col-10">
+                                    <div class="form-group col-12">
+                                        <label  class="col-sm-6 control-label ">Post Headline</label>
+                                        <input class="form-control" th:field="*{postHeadline}" type="text" placeholder="Post headline">
+                                        <p th:if="${#fields.hasErrors('postHeadline')}"th:errors="*{postHeadline}" class="alert alert-danger"><br/></p>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label  class="col-sm-6 control-label ">Post Name</label>
+                                        <input class="form-control" th:field="*{postName}" type="text" placeholder=" Post name">
+                                        <p th:if="${#fields.hasErrors('postName')}"th:errors="*{postName}" class="alert alert-danger"><br/></p>
+                                    </div>
+
+                                    <option class="form-group col-12">
+                                        <label  class="col-sm-6 control-label ">Post Category</label>
+                                        <select class="form-control" name="categoryId">
+                                            <option value="" selected disabled> Select Post Category... </option>
+                                            <option th:each="postCats : ${postCategories}"
+                                                th:text="${postCats.categoryName}"
+                                                th:value="${postCats.id}">
+                                            </option>
+
+                                        </select>
+                                        <label class="control-label col-6">Insert Image</label>
+                                    <input name="image" th:field="*{postImage}" class="col-12 form-control" type="file" multiple/>
+
+
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <p th:if="${#fields.hasErrors('postBody')}"th:errors="*{postName}" class="alert alert-danger"><br/></p>
+                                        <label class="control-label"> Post Body</label>
+                                        <textarea id="note" th:field="*{postBody}" class="form-control" cols="30" rows="10"></textarea>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Post <i class="fa fa-paper-plane"></i> </button>
+                            </form>
+                        </div><!--Dashboard Add Post Ends-->
+
+
+                        <div id="view_posts" class="ml-3 pb-3 tab-pane fade"><!--Dashboard edit post-->
+                            <table class="table">
+                                <thead class="text-center">
+                                <tr>
+                                <th>S/N</th>
+                                <th>Post Title</th>
+                                <th>Date Posted</th>
+                                <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tr th:each="pst ,iterStat: ${posts}">
+                                    <td class="text-center" th:text="${iterStat.count}"></td>
+                                    <td class="text-center" th:text="${pst.postHeadline}"></td>
+                                    <td class="text-center" th:text="${pst.createdAt}"></td>
+                                    <td class="text-center navbar">
+                                        <div class="dropdown bg-dark">
+                                            <a href="" class="dropdown-toggle btn btn-dark" data-toggle="dropdown">Action </a>
+                                            <ul class="dropdown-menu text-center">
+                                                <a href="#" th:href="@{/adminpage/post/view__${pst.id}__}" class="dashboard-dropdown-item btn btn-success" target="_blank"><span class="fa fa-eye"></span> View </a>
+
+                                                <a href="#" th:href="@{/adminpage/post/edit__${pst.id}__}" class="dashboard-dropdown-item btn btn-primary"><span class="fa fa-edit"></span> Edit </a>
+
+                                                <a href="#" th:href="@{/adminpage/post/delete__${pst.id}__}" class="dashboard-dropdown-item btn btn-danger"><span class="fa fa-trash"></span> Delete </a>
+                                            </ul>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div><!--Dashboard edit post ends-->
+
+                        <div id="manage_sidebar" class="ml-4 pb-3 tab-pane fade"><!--Dashboard manage sidebar-->
+                            <form> <!--Add New Top News-->
+                                <div class="form-group">
+                                    <label class="control-label">News Headline:</label>
+                                    <input class="form-control col-7" type="text">
+                                </div>
+                                <button class="btn btn-primary">Add News</button>
+                            </form> <!--Add New Top News-->
+                            <h2 class="text-primary text-center">Current Top News</h2>
+                            <div class="row">
+                                <div class="col-12"><!--Name Top News-->
+                                    <table class="table">
+                                        <thead class="text-center">
+                                        <tr>
+                                        <th>S/N</th>
+                                        <th>Post Title</th>
+                                        <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Google Chrome becomes the most used web broswer</td>
+                                            <td>
+                                                <div class="btn btn-group">
+                                                    <a href="" class="btn btn-secondary bn-sm"><span class="fa fa-arrow-up"></span></a>
+
+                                                    <a href="" class="btn btn-secondary bn-sm"><span class="fa fa-arrow-down"></span></a>
+
+                                                    <div class="navbar">
+                                                        <div class="dropdown bg-dark">
+                                                            <a href="" class="dropdown-toggle btn btn-dark" data-toggle="dropdown">Action </a>
+                                                            <ul class="dropdown-menu text-center">
+                                                                <a href="#" class="dashboard-dropdown-item btn btn-success"><span class="fa fa-eye"></span> View </a>
+
+                                                                <a href="#" class="dashboard-dropdown-item btn btn-primary"><span class="fa fa-edit"></span> Edit </a>
+
+                                                                <a href="#" class="dashboard-dropdown-item btn btn-danger"><span class="fa fa-trash"></span> Delete </a>
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div> <!--Manage Top news-->
+
+                            </div>
+
+
+
+                        </div><!--Dashboard Manage sidebar Ends-->
+                    </div>
+                </div>
+            </div> <!--Dashboard manage post tab ends-->
+
+
+            <div id="manage_ads" class="tab-pane fade"><!--Manage ads pills-->
+                <div class="jumbotron">
+                    <div class="tab-header"><!--Manage Ads nav-->
+                        <ul class="nav nav-tab">
+                            <li class="nav-item"><a href="#add_ads" data-toggle="tab" class="nav-link text-success">Add Avert </a></li>
+                            <li class="nav-item"><a href="#manage_ads_tab" data-toggle="tab" class="nav-link text-danger">Manage Advert</a></li>
+                        </ul>
+                    </div><!--Manage Ads nav-->
+                    <div class="tab-content">
+                        <div id="add_ads" class="ml-3 pb-3 tab-pane fade ml-4 pb-3">
+                            <form>
+                                <div class="form-group col-6">
+                                    <input class="form-control" type="text" placeholder="Advert Name">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label class="control-label">Insert Image: <input type="file"></label>
+                                </div>
+
+                                <div class="form-group col-6">
+                                    <label class="control-label">Advert Hyperlink</label>
+                                    <input class="form-control" type="text" placeholder="http://www.eg.com">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Post Advert</button>
+                            </form>
+                        </div>
+                        <div id="manage_ads_tab" class="ml-3 pb-3 tab-pane fade ml-4 pb-3">
+                            <table class="table">
+                                <thead class="text-center">
+                                <tr>
+                                <th>S/N</th>
+                                <th>ads Title</th>
+                                <th>Date Posted</th>
+                                <th>Expriy Date</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Dstv</td>
+                                    <td>30-08-2018</td>
+                                    <td>4-09-2018</td>
+                                    <td>Active</td>
+                                    <td class="text-center navbar">
+                                        <div class="dropdown bg-dark">
+                                            <a href="" class="dropdown-toggle btn btn-dark" data-toggle="dropdown">Action </a>
+                                            <ul class="dropdown-menu text-center">
+                                                <a href="#" class="dashboard-dropdown-item btn btn-success"><span class="fa fa-eye"></span> View </a>
+
+                                                <a href="#" class="dashboard-dropdown-item btn btn-primary"><span class="fa fa-edit"></span> Edit </a>
+
+                                                <a href="#" class="dashboard-dropdown-item btn btn-danger"><span class="fa fa-trash"></span> Delete </a>
+                                            </ul>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div> <!--Manage ads pills ends-->
+
+            <div id="messages" class="tab-pane fade"><!--Dashboard messages-->
+                <div class="jumbotron">
+                    <div class="tab-header"> <!--Messages nav-->
+                        <nav>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item"><a href="#inbox"   data-toggle="tab" class="nav-link text-info">Inbox <span class="badge badge-info">10</span></a></li>
+                                <li class="nav-item"><a href="#compose" data-toggle="tab" class="nav-link text-primary">Compose</a></li>
+                                <li class="nav-item"><a href="#drafts"  data-toggle="tab" class="nav-link text-warning">Drafts <span class="badge badge-info">2</span></a></li>
+                            </ul>
+                        </nav>
+                    </div> <!--Messages Ads nav-->
+                </div>
+                <div class="tab-content">
+                    <div id="inbox" class="tab-pane fade ml-4 pb-3"><!--dashboard Inbox-->
+                        <ul class="mails">
+                            <li><b class="col-6">facebook.com</b><a class="col-6" href="#"> <i>Check Up On Contract</i> </a></li>
+                            <li><b class="col-6">Google.com</b><a class="col-6" href="#"> <i>We Need Your Services</i> </a></li>
+                            <li><b class="col-6">GTbank</b><a class="col-6" href="#"> <i>Credit Alert</i> </a></li>
+                            <li><b class="col-6">FirstBank</b><a class="col-6" href="#"> <i>Credit Alert</i> </a></li>
+                            <li><b class="col-6">Drake</b><a class="col-6" href="#"> <i>Show invitation</i> </a></li>
+                            <li><b class="col-6">Google.com</b><a class="col-6" href="#"> <i>Contract Extension</i> </a></li>
+                            <li><b class="col-6">SnapChat</b><a class="col-6" href="#"> <i>Thanks For Saving Our Company</i> </a></li>
+                            <li><b class="col-6">BabyMama</b><a class="col-6" href="#"> <i>I'm Sorry, Let's Talk</i> </a></li>
+                            <li><b class="col-6">Mike@gmail.com</b><a class="col-6" href="#"> <i>Need Info on Galaxy S9</i> </a></li>
+                            <li><b class="col-6">AirFrance</b><a class="col-6" href="#"> <i>Flight Time Postponed</i> </a></li>
+                        </ul>
+                    </div><!--Dashboard inbox ends-->
+                    <div id="compose" class="tab-pane fade ml-4 pb-3"><!--Dashboard Compose message-->
+                        <form class="form-row ml-4">
+                            <div class="form-group col-6">
+                                <label class="control-label">Send to:</label>
+                                <input class="form-control" type="text" placeholder="Email">
+                            </div>
+                            <div class="form group text-center col-6">
+                                <label class="control-label">Send to All Subscribers </label>
+                                <input class="form-control" type="checkbox" name="Send to All Subscribers">
+                            </div>
+                            <div class="form-group col-12">
+                                <textarea cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label"><i class="fa fa-paperclip"></i> Add File</label>
+                                <input class="form-label" type="file" name="attachment">
+                            </div>
+                            <button class="btn btn-primary"><i class="fa fa-paper-plane"></i>Send</button>
+                        </form>
+                    </div><!--Dashboard Compose Message ends-->
+
+                    <div id="drafts" class="tab-pane fade ml-4 pb-3"><!-- Dashboard drafts-->
+                        <ul class="mails">
+                            <li><b class="col-6">NCC</b><a class="col-6" href="#"> <i>Update on Systems</i> </a></li>
+                            <li><b class="col-6">Subscribers</b><a class="col-6" href="#"> <i>Read New Blog Post</i> </a></li>
+                        </ul>
+                    </div><!--Dashboard Drafts-->
+                </div>
+
+
+            </div><!--Dashboard messages ends-->
+
+            <div id="manage_page_content" class="tab-pane fade"><!--Manage Page Content-->
+                <div class="jumbotron">
+                    <div class="tab-header"><!--Manage Page Content Gallery Nav-->
+                        <ul class="nav nav-tab">
+                            <li class="nav-item"><a href="#manage_contact_page" data-toggle="tab" class="nav-link text-success">Manage Contact Page </a></li>
+                            <li class="nav-item"><a href="#manage_about_page" data-toggle="tab" class="nav-link text-danger">Manage About Page</a></li>
+                        </ul>
+                    </div><!--Manage Page Content Nav -->
+
+                    <div class="tab-content">
+                        <div id="manage_contact_page" class="tab-pane fade"><!--Manage gallery-->
+                            <div class="jumbotron">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <td>S/N </td>
+                                        <td>Address</td>
+                                        <td>Action</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>6th Floor Twin Tower, Silicon Valley</td>
+                                        <td class="text-center navbar">
+                                            <div class="dropdown bg-dark">
+                                                <a href="" class="dropdown-toggle btn btn-dark" data-toggle="dropdown">Action </a>
+                                                <ul class="dropdown-menu text-center">
+
+                                                    <a href="#" class="dashboard-dropdown-item btn btn-primary"><span class="fa fa-edit"></span>Update </a>
+
+                                                    <a href="#" class="dashboard-dropdown-item btn btn-danger"><span class="fa fa-trash"></span> Delete </a>
+                                                </ul>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="mt-3">
+                                    <form>
+                                        <div class="form-group col-6">
+                                            <input class="form-control" type="text" placeholder="Address">
+
+                                            <button type="submit" class="btn btn-primary">Add Address</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div><!--Manage gallery-->
+
+                        <div id="manage_about_page" class="tab-pane fade"><!--Manage About Page-->
+                            <div class="jumbotron">
+                                <form>
+                                    <div class="form-group col-6">
+                                        <textarea rows="5" class="form-control" type="text" placeholder="Address"></textarea>
+                                    </div>
+                                </form>
+                            </div><!--Manage About Page-->
+
+                        </div> <!--Manage Page content ends-->
+                    </div>
+
+
+                </div>
+            </div>
+
+    </div><!--TAB CONTENT ENDS -->
+    </div>
+
+</div> <!--Page Wrapper ends-->
+</body>
+
+<!-- compiled and minified js-->
+
+<script th:src="@{/js/jquery-3.3.1.min.js}"type="text/javascript"></script>
+<script src="/js/popper.js" type="text/javascript"></script>
+<!--<script src="https://unpkg.com/popper.js" type="text/javascript"></script>-->
+<script th:src="@{/js/bootstrap.js}" type="text/javascript"></script>
+<script src="/js/jquery/jquery-ui.js" type="text/javascript"></script>
+<script src="/js/script.js" type="text/javascript"></script>
+<script src="/summernote/summernote-bs4.js"></script>
+</html>

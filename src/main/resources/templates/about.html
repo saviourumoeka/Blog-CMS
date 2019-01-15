@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/frontpage :: header"/>
+<body>
+        <div class="container mt-3"> <!--PAge Wrapper-->
+            <div class="page-header" th:replace="common/frontpage :: navbar"/><!--PAGE HEADER-->
+
+<div class="row">
+
+    <div class="col-md-8 jumbotron">
+                    <div class="row">
+                        <h2 class="text-center abtme"><b> About Me</b></h2>
+                    <p class="lead">Xavier Technology is a Start Up firm that Researches into the future of technology. <br>
+                        Get the Tech news and reviews you can Trust. You think the specifications or price of a device is too good to be true? 
+                        Meet the myth busters and read about it on my blog.
+                            I keep close ears on Top Tech companies to give you the best news about new and developing technogies and tell you which 
+                            is best for you.
+                        </p>
+                        <h3 class="abtme">How do I know all this?</h3>
+                        <p>I am an IT consultant and I  have worked with top IT companies Like Facebook, Google, Datalink and have done a 
+                            few contract Jobs with a lot more. So I have been around a lot to know the best. You need my services and Experties?
+                            <a href="contact.html">Contact me</a>
+                        </p>
+
+                        <h3 class="abtme">What I have been upto lately</h3>
+                        <p>I have been doing a lot of Beta testing lately, I preorder most of our beloved new devices test and use it and make a 
+                            <em>True</em> review before it gets to most of y'all. Why don't you see for yourself in my <a href="#">Gallery</a> please try to
+                            tell me anothers what you think.
+                        </p>
+                    </div>    
+                </div>
+
+
+
+         <div class="col-md-4 col-sm-12" id="aside" th:replace="common/frontpage :: sidebar"/><!--Aside sec-->
+            </div>
+
+            <div th:replace="common/frontpage :: footer"/>
+            
+        </div><!--PAGE WRAPPER ENDS -->
+
+
+
+
+</body>
+</html>

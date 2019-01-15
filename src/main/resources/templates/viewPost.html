@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/frontpage :: header"/>
+
+<body>
+    <div class="container mt-3"><!--PAGE WRAPPER-->
+        <div class="page-header" th:replace="common/frontpage :: navbar"/><!--PAGE HEADER-->
+
+    
+                <div class="row">
+     <div class="col-md-8 col-sm-10" id="content"> <!--CONTENT SEC STARTS-->
+            <div class="row">67
+            <div class="col-md-12 col-sm-12">
+                    <h2 class="mt-3"> <b th:text="${post.postHeadline}"></b></h2>
+                    <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="">Article</a></li>
+                                <li class="breadcrumb-item"><a href="phones.html" th:text="${post.postCategory.categoryName}"></a></li>
+                                <li class="breadcrumb-item active" aria-current="page" th:text="${post.postName}"></li>
+                            </ol>
+                        </nav>
+                <div class="w-100"><img class="mediaimg img img-rounded img-fluid w-100" th:src="@{'/images/'+${post.id}+'.jpg'}"> </div>
+                        <p th:text="${post.postBody}"></p>
+                            <a href="#"> <span class="fa fa-thumbs-up"></span> Like </a><span class="badge badge-primary">100</span>
+                             
+            </div>
+
+            </div>
+    
+       </div> <!--CONTENT SEC--> 
+       
+       
+       <div class="col-md-4 col-sm-12" id="aside" th:replace="common/frontpage :: sidebar"/><!--Aside sec-->
+
+    </div>
+
+        <div th:replace="common/frontpage :: footer"/>
+
+
+    </div><!--Page Wrapper-->
+</body>
+</html>
+
+<script>
+
+
+</script>

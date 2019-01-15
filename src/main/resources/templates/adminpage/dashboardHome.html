@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminpage/common/dashBoard :: header"/>
+
+<body class="col-10 mx-auto">
+<div class="col-12" th:replace="adminpage/common/dashBoard :: pageheader"/>
+
+<div class="row"> <!--WRAPPER-->
+
+    <div th:replace="adminpage/common/dashBoard :: navpills"/>
+
+
+    <div class="jumbotron align-content-center col-md-10 text-center">
+
+        <h2> Welcome to The DashBoard What do you want to do today???</h2>
+
+
+    </div><!--Jumbotron-->
+</div><!--WRAPPER-->
+
+<div th:replace="adminpage/common/dashBoard :: scripts"/>
+</body>
+</html>
